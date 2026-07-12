@@ -72,3 +72,10 @@ coverage/
 # Misc
 # =========================
 *.tgz
+
+node_modules/
+.env
+server/.env
+
+vehicle.js
+driver.js
