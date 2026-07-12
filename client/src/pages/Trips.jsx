@@ -1,50 +1,14 @@
-import { useState } from "react";
 import Layout from "../components/layout/Layout";
 import PageHeader from "../components/common/PageHeader";
 import SearchBar from "../components/common/SearchBar";
 import StatusBadge from "../components/common/StatusBadge";
+
 import {
-  FaEdit,
-  FaTrash,
   FaPlay,
   FaCheck,
+  FaEdit,
+  FaTrash,
 } from "react-icons/fa";
-
-const vehicles = [
-  {
-    name: "Tata Ace",
-    capacity: 800,
-    status: "Available",
-  },
-  {
-    name: "Bolero Pickup",
-    capacity: 1200,
-    status: "On Trip",
-  },
-  {
-    name: "Ashok Leyland",
-    capacity: 5000,
-    status: "In Shop",
-  },
-];
-
-const drivers = [
-  {
-    name: "Alex Johnson",
-    status: "Available",
-    licenseExpired: false,
-  },
-  {
-    name: "John Smith",
-    status: "On Trip",
-    licenseExpired: false,
-  },
-  {
-    name: "David Lee",
-    status: "Suspended",
-    licenseExpired: true,
-  },
-];
 
 const trips = [
   {
@@ -53,52 +17,33 @@ const trips = [
     destination: "Jaipur",
     vehicle: "Tata Ace",
     driver: "Alex Johnson",
-    cargo: 450,
-    distance: 280,
+    cargo: "450 kg",
+    distance: "280 km",
     status: "Pending",
+  },
+  {
+    id: 2,
+    source: "Mumbai",
+    destination: "Pune",
+    vehicle: "Bolero Pickup",
+    driver: "John Smith",
+    cargo: "900 kg",
+    distance: "160 km",
+    status: "On Trip",
+  },
+  {
+    id: 3,
+    source: "Chennai",
+    destination: "Bangalore",
+    vehicle: "Ashok Leyland",
+    driver: "David Lee",
+    cargo: "3000 kg",
+    distance: "350 km",
+    status: "Completed",
   },
 ];
 
 const Trips = () => {
-  const [cargoWeight, setCargoWeight] = useState("");
-
-  const validateTrip = () => {
-    const vehicle = vehicles[0];
-    const driver = drivers[0];
-
-    if (cargoWeight > vehicle.capacity) {
-      alert("❌ Cargo exceeds vehicle capacity");
-      return;
-    }
-
-    if (vehicle.status === "In Shop") {
-      alert("❌ Vehicle is in maintenance");
-      return;
-    }
-
-    if (vehicle.status === "On Trip") {
-      alert("❌ Vehicle already assigned");
-      return;
-    }
-
-    if (driver.status === "Suspended") {
-      alert("❌ Driver is suspended");
-      return;
-    }
-
-    if (driver.licenseExpired) {
-      alert("❌ Driver license expired");
-      return;
-    }
-
-    if (driver.status === "On Trip") {
-      alert("❌ Driver already assigned");
-      return;
-    }
-
-    alert("✅ Trip Validation Successful");
-  };
-
   return (
     <Layout>
       <PageHeader
@@ -110,82 +55,79 @@ const Trips = () => {
         <SearchBar placeholder="Search Trip..." />
       </div>
 
-      <div className="bg-white rounded-xl shadow p-6 mb-8">
-
-        <h2 className="text-xl font-bold mb-5">
-          Trip Validation Demo
-        </h2>
-
-        <input
-          type="number"
-          placeholder="Cargo Weight"
-          value={cargoWeight}
-          onChange={(e) =>
-            setCargoWeight(Number(e.target.value))
-          }
-          className="border rounded-lg p-3 mr-4"
-        />
-
-        <button
-          onClick={validateTrip}
-          className="bg-blue-600 text-white px-5 py-3 rounded-lg"
-        >
-          Validate Trip
-        </button>
-
-      </div>
-
-      <div className="bg-white rounded-xl shadow overflow-hidden">
-
+      <div
+        className="rounded-2xl border shadow-md overflow-hidden"
+        style={{
+          background: "var(--card)",
+          borderColor: "var(--border)",
+        }}
+      >
         <table className="w-full">
-
-          <thead className="bg-gray-100">
-
+          <thead
+            style={{
+              background: "var(--bg)",
+            }}
+          >
             <tr>
-              <th className="text-left p-4">Source</th>
-              <th>Destination</th>
-              <th>Vehicle</th>
-              <th>Driver</th>
-              <th>Cargo</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th className="p-4 text-left">Source</th>
+              <th className="p-4 text-left">Destination</th>
+              <th className="p-4 text-left">Vehicle</th>
+              <th className="p-4 text-left">Driver</th>
+              <th className="p-4 text-left">Cargo</th>
+              <th className="p-4 text-left">Distance</th>
+              <th className="p-4 text-left">Status</th>
+              <th className="p-4 text-left">Actions</th>
             </tr>
-
           </thead>
 
           <tbody>
-
             {trips.map((trip) => (
-              <tr key={trip.id} className="border-b">
-
+              <tr
+                key={trip.id}
+                style={{
+                  color: "var(--text)",
+                  borderTop: "1px solid var(--border)",
+                }}
+              >
                 <td className="p-4">{trip.source}</td>
-                <td>{trip.destination}</td>
-                <td>{trip.vehicle}</td>
-                <td>{trip.driver}</td>
-                <td>{trip.cargo} kg</td>
+                <td className="p-4">{trip.destination}</td>
+                <td className="p-4">{trip.vehicle}</td>
+                <td className="p-4">{trip.driver}</td>
+                <td className="p-4">{trip.cargo}</td>
+                <td className="p-4">{trip.distance}</td>
 
-                <td>
+                <td className="p-4">
                   <StatusBadge status={trip.status} />
                 </td>
 
-                <td>
-                  <div className="flex gap-3">
-                    <FaPlay />
-                    <FaCheck />
-                    <FaEdit />
-                    <FaTrash />
+                <td className="p-4">
+                  <div className="flex gap-4">
+
+                    <button className="text-green-600">
+                      <FaPlay />
+                    </button>
+
+                    <button className="text-blue-600">
+                      <FaCheck />
+                    </button>
+
+                    <button className="text-yellow-600">
+                      <FaEdit />
+                    </button>
+
+                    <button className="text-red-600">
+                      <FaTrash />
+                    </button>
+
                   </div>
                 </td>
 
               </tr>
             ))}
-
           </tbody>
 
         </table>
-
       </div>
-
     </Layout>
   );
 };

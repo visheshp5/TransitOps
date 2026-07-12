@@ -1,9 +1,12 @@
-const PrimaryButton = ({ children, onClick, type = "button" }) => {
+const PrimaryButton = ({ children, onClick }) => {
   return (
     <button
-      type={type}
       onClick={onClick}
-      className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition"
+      className="px-6 py-3 rounded-xl font-semibold shadow transition hover:scale-105"
+      style={{
+        background: "#2563eb",
+        color: "#fff",
+      }}
     >
       {children}
     </button>

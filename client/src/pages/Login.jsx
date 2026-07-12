@@ -17,7 +17,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
 
-      <div className="bg-white p-10 rounded-xl shadow-lg w-96">
+      <div className="bg-slate-800 p-10 rounded-xl shadow-lg w-96">
 
         <h1 className="text-3xl font-bold mb-8">
           TransitOps Login
@@ -47,7 +47,7 @@ const Login = () => {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-600 text-white p-3 rounded-lg"
+          className="w-full bg-blue-600 text-gray-800 p-3 rounded-lg"
         >
           Login
         </button>

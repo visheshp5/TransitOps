@@ -2,9 +2,14 @@ import Layout from "../components/layout/Layout";
 import PageHeader from "../components/common/PageHeader";
 import SearchBar from "../components/common/SearchBar";
 import StatusBadge from "../components/common/StatusBadge";
-import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
 
-const maintenanceLogs = [
+import {
+  FaCheckCircle,
+  FaEdit,
+  FaTrash,
+} from "react-icons/fa";
+
+const maintenance = [
   {
     id: 1,
     vehicle: "Tata Ace",
@@ -34,16 +39,6 @@ const maintenanceLogs = [
   },
 ];
 
-const columns = [
-  "Vehicle",
-  "Registration",
-  "Maintenance",
-  "Date",
-  "Cost",
-  "Status",
-  "Actions",
-];
-
 const Maintenance = () => {
   return (
     <Layout>
@@ -56,58 +51,63 @@ const Maintenance = () => {
         <SearchBar placeholder="Search Maintenance..." />
       </div>
 
-      <div className="bg-white rounded-xl shadow overflow-hidden">
+      <div
+        className="rounded-2xl border shadow-md overflow-hidden"
+        style={{
+          background: "var(--card)",
+          borderColor: "var(--border)",
+        }}
+      >
         <table className="w-full">
-          <thead className="bg-gray-100">
+
+          <thead
+            style={{
+              background: "var(--bg)",
+            }}
+          >
             <tr>
-              {columns.map((col) => (
-                <th
-                  key={col}
-                  className="text-left px-6 py-4 font-semibold"
-                >
-                  {col}
-                </th>
-              ))}
+              <th className="p-4 text-left">Vehicle</th>
+              <th className="p-4 text-left">Registration</th>
+              <th className="p-4 text-left">Maintenance</th>
+              <th className="p-4 text-left">Date</th>
+              <th className="p-4 text-left">Cost</th>
+              <th className="p-4 text-left">Status</th>
+              <th className="p-4 text-left">Actions</th>
             </tr>
           </thead>
 
           <tbody>
-            {maintenanceLogs.map((item) => (
+
+            {maintenance.map((item) => (
               <tr
                 key={item.id}
-                className="border-b hover:bg-gray-50"
+                style={{
+                  color: "var(--text)",
+                  borderTop: "1px solid var(--border)",
+                }}
               >
-                <td className="px-6 py-4">{item.vehicle}</td>
-                <td>{item.registration}</td>
-                <td>{item.type}</td>
-                <td>{item.date}</td>
-                <td>{item.cost}</td>
+                <td className="p-4">{item.vehicle}</td>
+                <td className="p-4">{item.registration}</td>
+                <td className="p-4">{item.type}</td>
+                <td className="p-4">{item.date}</td>
+                <td className="p-4">{item.cost}</td>
 
-                <td>
+                <td className="p-4">
                   <StatusBadge status={item.status} />
                 </td>
 
-                <td>
-                  <div className="flex gap-3">
+                <td className="p-4">
+                  <div className="flex gap-4">
 
-                    <button
-                      className="text-green-600 hover:text-green-800"
-                      title="Close Maintenance"
-                    >
+                    <button className="text-green-600">
                       <FaCheckCircle />
                     </button>
 
-                    <button
-                      className="text-blue-600 hover:text-blue-800"
-                      title="Edit"
-                    >
+                    <button className="text-blue-600">
                       <FaEdit />
                     </button>
 
-                    <button
-                      className="text-red-600 hover:text-red-800"
-                      title="Delete"
-                    >
+                    <button className="text-red-600">
                       <FaTrash />
                     </button>
 
@@ -116,7 +116,9 @@ const Maintenance = () => {
 
               </tr>
             ))}
+
           </tbody>
+
         </table>
       </div>
     </Layout>

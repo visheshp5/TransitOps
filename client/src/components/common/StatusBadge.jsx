@@ -1,32 +1,30 @@
 const colors = {
-  // Vehicle Status
-  Available: "bg-green-100 text-green-700",
-  "On Trip": "bg-blue-100 text-blue-700",
-  "In Shop": "bg-orange-100 text-orange-700",
-  Retired: "bg-red-100 text-red-700",
+  Available: "#16a34a",
+  "On Trip": "#2563eb",
+  "In Shop": "#ea580c",
+  Retired: "#dc2626",
 
-  // Driver Status
-  Suspended: "bg-red-100 text-red-700",
-  "Off Duty": "bg-gray-100 text-gray-700",
+  Suspended: "#dc2626",
+  "Off Duty": "#64748b",
 
-  // Trip Status
-  Draft: "bg-gray-100 text-gray-700",
-  Pending: "bg-yellow-100 text-yellow-700",
-  Dispatched: "bg-blue-100 text-blue-700",
-  Completed: "bg-green-100 text-green-700",
-  Cancelled: "bg-red-100 text-red-700",
+  Draft: "#64748b",
+  Pending: "#ca8a04",
+  Dispatched: "#2563eb",
+  Completed: "#16a34a",
+  Cancelled: "#dc2626",
 
-  // Maintenance Status
-  Active: "bg-orange-100 text-orange-700",
-  Closed: "bg-green-100 text-green-700",
+  Active: "#ea580c",
+  Closed: "#16a34a",
 };
 
 const StatusBadge = ({ status }) => {
   return (
     <span
-      className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-        colors[status] || "bg-gray-100 text-gray-700"
-      }`}
+      className="px-3 py-1 rounded-full text-sm font-semibold"
+      style={{
+        background: `${colors[status]}20`,
+        color: colors[status] || "#64748b",
+      }}
     >
       {status}
     </span>

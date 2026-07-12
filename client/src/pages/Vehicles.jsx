@@ -1,8 +1,8 @@
-import { useState } from "react";
 import Layout from "../components/layout/Layout";
 import PageHeader from "../components/common/PageHeader";
 import SearchBar from "../components/common/SearchBar";
 import StatusBadge from "../components/common/StatusBadge";
+
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const vehicles = [
@@ -35,36 +35,7 @@ const vehicles = [
   },
 ];
 
-const columns = [
-  "Registration",
-  "Model",
-  "Type",
-  "Capacity",
-  "Odometer",
-  "Cost",
-  "Status",
-  "Actions",
-];
-
 const Vehicles = () => {
-  const [search, setSearch] = useState("");
-
-  const filteredVehicles = vehicles.filter(
-    (vehicle) =>
-      vehicle.registration
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      vehicle.model
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      vehicle.type
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      vehicle.status
-        .toLowerCase()
-        .includes(search.toLowerCase())
-  );
-
   return (
     <Layout>
       <PageHeader
@@ -73,85 +44,105 @@ const Vehicles = () => {
       />
 
       <div className="mb-6">
-        <SearchBar
-          placeholder="Search Vehicle..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <SearchBar placeholder="Search Vehicle..." />
       </div>
 
-      <div className="bg-white rounded-xl shadow overflow-hidden">
+      <div
+        className="rounded-2xl border shadow-md overflow-hidden"
+        style={{
+          background: "var(--card)",
+          borderColor: "var(--border)",
+        }}
+      >
         <table className="w-full">
-          <thead className="bg-gray-100">
+
+          <thead
+            style={{
+              background: "var(--bg)",
+            }}
+          >
             <tr>
-              {columns.map((col) => (
-                <th
-                  key={col}
-                  className="text-left px-6 py-4 font-semibold text-gray-700"
-                >
-                  {col}
-                </th>
-              ))}
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Registration
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Model
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Type
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Capacity
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Odometer
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Cost
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Status
+              </th>
+
+              <th className="p-4 text-left" style={{ color: "var(--text)" }}>
+                Actions
+              </th>
+
             </tr>
           </thead>
 
           <tbody>
-            {filteredVehicles.length > 0 ? (
-              filteredVehicles.map((vehicle) => (
-                <tr
-                  key={vehicle.registration}
-                  className="border-b hover:bg-gray-50"
-                >
-                  <td className="px-6 py-4">
-                    {vehicle.registration}
-                  </td>
 
-                  <td>{vehicle.model}</td>
+            {vehicles.map((vehicle) => (
+              <tr
+                key={vehicle.registration}
+                style={{
+                  borderTop: "1px solid var(--border)",
+                  color: "var(--text)",
+                }}
+              >
+                <td className="p-4">{vehicle.registration}</td>
 
-                  <td>{vehicle.type}</td>
+                <td className="p-4">{vehicle.model}</td>
 
-                  <td>{vehicle.capacity}</td>
+                <td className="p-4">{vehicle.type}</td>
 
-                  <td>{vehicle.odometer}</td>
+                <td className="p-4">{vehicle.capacity}</td>
 
-                  <td>{vehicle.cost}</td>
+                <td className="p-4">{vehicle.odometer}</td>
 
-                  <td>
-                    <StatusBadge
-                      status={vehicle.status}
-                    />
-                  </td>
+                <td className="p-4">{vehicle.cost}</td>
 
-                  <td>
-                    <div className="flex gap-4">
-                      <button
-                        className="text-blue-600 hover:text-blue-800"
-                        title="Edit Vehicle"
-                      >
-                        <FaEdit size={18} />
-                      </button>
-
-                      <button
-                        className="text-red-600 hover:text-red-800"
-                        title="Delete Vehicle"
-                      >
-                        <FaTrash size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan="8"
-                  className="text-center py-8 text-gray-500"
-                >
-                  No vehicles found.
+                <td className="p-4">
+                  <StatusBadge status={vehicle.status} />
                 </td>
+
+                <td className="p-4">
+                  <div className="flex gap-4">
+
+                    <button className="text-blue-600 hover:scale-110 transition">
+                      <FaEdit />
+                    </button>
+
+                    <button className="text-red-600 hover:scale-110 transition">
+                      <FaTrash />
+                    </button>
+
+                  </div>
+                </td>
+
               </tr>
-            )}
+            ))}
+
           </tbody>
+
         </table>
       </div>
     </Layout>

@@ -1,17 +1,133 @@
 @import "tailwindcss";
 
+/* =========================
+   LIGHT THEME
+========================= */
+
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --sidebar: #ffffff;
+  --navbar: #ffffff;
+
+  --text: #111827;
+  --text2: #6b7280;
+
+  --border: #e5e7eb;
+}
+
+/* =========================
+   DARK THEME
+========================= */
+
+.dark {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --sidebar: #020617;
+  --navbar: #1e293b;
+
+  --text: #f8fafc;
+  --text2: #94a3b8;
+
+  --border: #334155;
+}
+
+/* =========================
+   RESET
+========================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
 body {
-  background: #f3f4f6;
-  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  transition: all 0.25s ease;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 18px;
+}
+
+th {
+  color: var(--text);
+  font-weight: 600;
+}
+
+td {
+  color: var(--text);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* =========================
+   SELECTION
+========================= */
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
+
+/* =========================
+   REMOVE DEFAULT VITE STYLES
+========================= */
+
+#root {
+  background: var(--bg);
 }

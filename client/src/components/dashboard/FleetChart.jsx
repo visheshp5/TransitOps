@@ -4,9 +4,11 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
+  CartesianGrid,
 } from "recharts";
+
+import { useTheme } from "../../context/ThemeContext";
 
 const data = [
   { month: "Jan", trips: 12 },
@@ -18,51 +20,68 @@ const data = [
 ];
 
 const FleetChart = () => {
+  const { dark } = useTheme();
+
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 mt-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">
-        Monthly Trips Analytics
+    <div
+      className="rounded-2xl border shadow-md mt-8 p-6"
+      style={{
+        background: "var(--card)",
+        borderColor: "var(--border)",
+      }}
+    >
+      <h2
+        className="text-2xl font-bold mb-6"
+        style={{
+          color: "var(--text)",
+        }}
+      >
+        Fleet Analytics
       </h2>
 
       <ResponsiveContainer width="100%" height={350}>
-        <BarChart
-          data={data}
-          margin={{
-            top: 10,
-            right: 20,
-            left: 0,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+        <BarChart data={data}>
+          <CartesianGrid
+            stroke={dark ? "#475569" : "#e5e7eb"}
+            strokeDasharray="3 3"
+          />
 
           <XAxis
             dataKey="month"
-            tick={{ fill: "#6b7280", fontSize: 14 }}
-            axisLine={false}
+            tick={{
+              fill: dark ? "#f8fafc" : "#374151",
+            }}
+            axisLine={{
+              stroke: dark ? "#64748b" : "#d1d5db",
+            }}
             tickLine={false}
           />
 
           <YAxis
-            tick={{ fill: "#6b7280", fontSize: 14 }}
-            axisLine={false}
+            tick={{
+              fill: dark ? "#f8fafc" : "#374151",
+            }}
+            axisLine={{
+              stroke: dark ? "#64748b" : "#d1d5db",
+            }}
             tickLine={false}
           />
 
           <Tooltip
-            cursor={{ fill: "#f3f4f6" }}
             contentStyle={{
+              backgroundColor: dark ? "#1e293b" : "#ffffff",
+              border: dark
+                ? "1px solid #475569"
+                : "1px solid #e5e7eb",
+              color: dark ? "#ffffff" : "#111827",
               borderRadius: "10px",
-              border: "1px solid #e5e7eb",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             }}
           />
 
           <Bar
             dataKey="trips"
             fill="#2563eb"
-            radius={[8, 8, 0, 0]}
-            barSize={45}
+            radius={[10, 10, 0, 0]}
           />
         </BarChart>
       </ResponsiveContainer>

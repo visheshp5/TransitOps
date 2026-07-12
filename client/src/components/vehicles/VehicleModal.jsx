@@ -10,7 +10,7 @@ const VehicleModal = ({
   return (
     <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
 
-      <div className="bg-white p-8 rounded-xl w-[500px]">
+      <div className="bg-slate-800 p-8 rounded-xl w-[500px]">
 
         <div className="flex justify-between mb-5">
 

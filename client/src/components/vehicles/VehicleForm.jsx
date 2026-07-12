@@ -30,7 +30,7 @@ const VehicleForm = ({ onSubmit }) => {
         className="w-full border p-3 rounded-lg"
       />
 
-      <button className="bg-blue-600 text-white px-5 py-3 rounded-lg w-full">
+      <button className="bg-blue-600 text-gray-800 px-5 py-3 rounded-lg w-full">
         Save Vehicle
       </button>
     </form>
