@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const vehicleSchema = new mongoose.Schema(
   {
@@ -6,50 +6,48 @@ const vehicleSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      trim: true,
+      uppercase: true,
     },
-
     vehicleName: {
       type: String,
       required: true,
     },
-
     model: {
       type: String,
-      default: "",
+      required: true,
     },
-
     type: {
       type: String,
-      default: "Van",
+      enum: ['Truck', 'Van', 'Mini Truck', 'Pickup', 'Container'],
+      required: true,
     },
-
     maxLoadCapacity: {
       type: Number,
       required: true,
+      min: 1,
     },
-
     odometer: {
       type: Number,
       default: 0,
+      min: 0,
     },
-
     acquisitionCost: {
       type: Number,
-      default: 0,
+      required: true,
+      min: 0,
     },
-
     region: {
       type: String,
-      default: "",
+      required: true,
     },
-
     status: {
       type: String,
-      enum: ["Available", "On Trip", "In Shop", "Retired"],
-      default: "Available",
+      enum: ['Available', 'On Trip', 'In Shop', 'Retired'],
+      default: 'Available',
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Vehicle", vehicleSchema);
+export default mongoose.model('Vehicle', vehicleSchema);
