@@ -1,23 +1,19 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
   createMaintenance,
   getMaintenanceRecords,
   closeMaintenance,
-} = require("../controllers/maintenanceController.js");
+} from "../controllers/maintenanceController.js";
 
-const authMiddleware = require("../middleware/authMiddleware.js");
-const roleMiddleware = require("../middleware/roleMiddleware.js");
-const { ROLES } = require("../utils/constants.js");
+import authMiddleware from "../middleware/authMiddleware.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
+import { ROLES } from "../utils/constants.js";
 
 const router = express.Router();
 
 // All authenticated users can view maintenance
-router.get(
-  "/",
-  authMiddleware,
-  getMaintenanceRecords
-);
+router.get("/", authMiddleware, getMaintenanceRecords);
 
 // Only Fleet Manager can create maintenance
 router.post(
@@ -35,4 +31,4 @@ router.patch(
   closeMaintenance
 );
 
-module.exports = router;
+export default router;

@@ -1,14 +1,14 @@
-const Vehicle = require("../models/Vehicle");
-const Driver = require("../models/Driver");
-const Trip = require("../models/Trip");
-const Maintenance = require("../models/Maintenance");
-const FuelLog = require("../models/FuelLog");
-const Expense = require("../models/Expense");
+import Vehicle from "../models/vehicle.js";
+import Driver from "../models/driver.js";
+import Trip from "../models/Trip.js";
+import Maintenance from "../models/Maintenance.js";
+import FuelLog from "../models/FuelLog.js";
+import Expense from "../models/Expense.js";
 
 // ==========================================
 // DASHBOARD KPIs
 // ==========================================
-exports.getDashboardKPIs = async (req, res) => {
+export const getDashboardKPIs = async (req, res) => {
   try {
     const [
       totalVehicles,
@@ -60,7 +60,7 @@ exports.getDashboardKPIs = async (req, res) => {
 // ==========================================
 // VEHICLE ANALYTICS
 // ==========================================
-exports.getVehicleAnalytics = async (req, res) => {
+export const getVehicleAnalytics = async (req, res) => {
   try {
     const vehicles = await Vehicle.find();
 

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const fuelLogSchema = new mongoose.Schema(
   {
@@ -41,4 +41,4 @@ const fuelLogSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("FuelLog", fuelLogSchema);
+export default mongoose.model("FuelLog", fuelLogSchema);

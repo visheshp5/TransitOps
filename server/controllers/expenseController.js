@@ -1,7 +1,7 @@
-const Expense = require("../models/Expense");
-const Vehicle = require("../models/Vehicle");
+import Expense from "../models/Expense.js";
+import Vehicle from "../models/vehicle.js";
 
-exports.createExpense = async (req, res) => {
+export const createExpense = async (req, res) => {
   try {
     const { vehicle: vehicleId, trip, type, amount, description, date } = req.body;
 
@@ -11,6 +11,17 @@ exports.createExpense = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Vehicle not found",
+      });
+    }
+
+    if (
+      amount == null ||
+      amount <= 0 ||
+      !type
+    ) {
+      return res.status(400).json({
+          success: false,
+         message: "Invalid expense details"
       });
     }
 
@@ -36,7 +47,7 @@ exports.createExpense = async (req, res) => {
   }
 };
 
-exports.getExpenses = async (req, res) => {
+export const getExpenses = async (req, res) => {
   try {
     // Get filters from query parameters
     const {

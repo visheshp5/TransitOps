@@ -1,9 +1,8 @@
-const Maintenance = require("../models/Maintenance");
-const Vehicle = require("../models/Vehicle");
-
+import Maintenance from "../models/Maintenance.js";
+import Vehicle from "../models/vehicle.js";
 
 // CREATE MAINTENANCE RECORD
-exports.createMaintenance = async (req, res) => {
+export const createMaintenance = async (req, res) => {
   try {
     const {
       vehicle: vehicleId,
@@ -73,7 +72,7 @@ exports.createMaintenance = async (req, res) => {
 
 
 // GET MAINTENANCE RECORDS
-exports.getMaintenanceRecords = async (req, res) => {
+export const getMaintenanceRecords = async (req, res) => {
   try {
      const { status, vehicle } = req.query;
 
@@ -107,7 +106,7 @@ exports.getMaintenanceRecords = async (req, res) => {
 
 
 // CLOSE MAINTENANCE
-exports.closeMaintenance = async (req, res) => {
+export const closeMaintenance = async (req, res) => {
   try {
     const maintenance = await Maintenance.findById(req.params.id);
 

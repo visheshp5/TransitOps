@@ -1,7 +1,7 @@
-const FuelLog = require("../models/FuelLog");
-const Vehicle = require("../models/Vehicle");
+import Vehicle from "../models/vehicle.js";
+import FuelLog from "../models/FuelLog.js";
 
-exports.createFuelLog = async (req, res) => {
+export const createFuelLog = async (req, res) => {
   try {
     const { vehicle: vehicleId, trip, liters, cost, date, odometer } = req.body;
 
@@ -13,6 +13,18 @@ exports.createFuelLog = async (req, res) => {
         message: "Vehicle not found",
       });
     }
+
+    if (
+      liters == null ||
+      cost == null ||
+      liters <= 0 ||
+      cost < 0
+    ) {
+      return res.status(400).json({
+          success: false,
+          message: "Invalid fuel data"
+      });
+  }
 
     const fuelLog = await FuelLog.create({
       vehicle: vehicleId,
@@ -36,7 +48,7 @@ exports.createFuelLog = async (req, res) => {
   }
 };
 
-exports.getFuelLogs = async (req, res) => {
+export const getFuelLogs = async (req, res) => {
   try {
     // Get filter values from query parameters
     const { vehicle, trip, startDate, endDate } = req.query;

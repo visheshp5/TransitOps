@@ -1,4 +1,4 @@
-const ROLES = {
+export const ROLES = {
   ADMIN: "ADMIN",
   DISPATCHER: "DISPATCHER",
   FLEET_MANAGER: "FLEET_MANAGER",
@@ -6,6 +6,4 @@ const ROLES = {
   DRIVER: "DRIVER",
 };
 
-module.exports = {
-  ROLES,
-};
+export default { ROLES };

@@ -1,13 +1,12 @@
-const Trip = require("../models/Trip");
-const Vehicle = require("../models/Vehicle");
-const Driver = require("../models/Driver");
-const FuelLog = require("../models/FuelLog");
-
+import Vehicle from "../models/vehicle.js";
+import Driver from "../models/driver.js";
+import Trip from "../models/Trip.js";
+import FuelLog from "../models/FuelLog.js";
 
 // ==========================================
 // CREATE TRIP
 // ==========================================
-exports.createTrip = async (req, res) => {
+export const createTrip = async (req, res) => {
   try {
     const {
       source,
@@ -119,7 +118,7 @@ exports.createTrip = async (req, res) => {
 // ==========================================
 // GET ALL TRIPS
 // ==========================================
-exports.getTrips = async (req, res) => {
+export const getTrips = async (req, res) => {
   try {
     const {
         status,
@@ -180,7 +179,7 @@ exports.getTrips = async (req, res) => {
 // ==========================================
 // GET SINGLE TRIP
 // ==========================================
-exports.getTripById = async (req, res) => {
+export const getTripById = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id)
       .populate("vehicle")
@@ -209,7 +208,7 @@ exports.getTripById = async (req, res) => {
 // ==========================================
 // DISPATCH TRIP
 // ==========================================
-exports.dispatchTrip = async (req, res) => {
+export const dispatchTrip = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
 
@@ -296,7 +295,7 @@ exports.dispatchTrip = async (req, res) => {
 // ==========================================
 // COMPLETE TRIP
 // ==========================================
-exports.completeTrip = async (req, res) => {
+export const completeTrip = async (req, res) => {
   try {
     const { endOdometer, fuelConsumed, fuelCost } = req.body;
 
@@ -340,6 +339,17 @@ exports.completeTrip = async (req, res) => {
     }
 
     const actualDistance = finalOdometer - startingOdometer;
+
+    if (
+      Number(fuelConsumed) > 0 &&
+      actualDistance > 0 &&
+      Number(fuelConsumed) > actualDistance
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Fuel consumed cannot exceed the distance travelled.",
+      });
+    }
 
     trip.endOdometer = finalOdometer;
     trip.actualDistance = actualDistance;
@@ -391,7 +401,7 @@ exports.completeTrip = async (req, res) => {
 // ==========================================
 // CANCEL TRIP
 // ==========================================
-exports.cancelTrip = async (req, res) => {
+export const cancelTrip = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
 

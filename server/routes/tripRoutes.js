@@ -1,17 +1,17 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
   createTrip,
   getTrips,
   getTripById,
   dispatchTrip,
   completeTrip,
   cancelTrip,
-} = require("../controllers/tripController.js");
+} from "../controllers/tripController.js";
 
-const authMiddleware = require("../middleware/authMiddleware.js");
-const roleMiddleware = require("../middleware/roleMiddleware.js");
-const { ROLES } = require("../utils/constants.js");
+import authMiddleware from "../middleware/authMiddleware.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
+import { ROLES } from "../utils/constants.js";
 
 const router = express.Router();
 
@@ -52,4 +52,4 @@ router.patch(
   cancelTrip
 );
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const roleMiddleware = (requiredRole) => {
+const roleMiddleware = (...requiredRoles) => {
   return (req, res, next) => {
     // Placeholder: Add role-based authorization logic here
     // For now, allow all roles
@@ -6,4 +6,4 @@ const roleMiddleware = (requiredRole) => {
   };
 };
 
-module.exports = roleMiddleware;
+export default roleMiddleware;

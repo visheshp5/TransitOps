@@ -1,22 +1,18 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
   createFuelLog,
   getFuelLogs,
-} = require("../controllers/fuelController.js");
+} from "../controllers/fuelController.js";
 
-const authMiddleware = require("../middleware/authMiddleware.js");
-const roleMiddleware = require("../middleware/roleMiddleware.js");
-const { ROLES } = require("../utils/constants.js");
+import authMiddleware from "../middleware/authMiddleware.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
+import { ROLES } from "../utils/constants.js";
 
 const router = express.Router();
 
 // Authenticated users can view
-router.get(
-  "/",
-  authMiddleware,
-  getFuelLogs
-);
+router.get("/", authMiddleware, getFuelLogs);
 
 // Financial Analyst can manually add fuel logs
 router.post(
@@ -26,4 +22,4 @@ router.post(
   createFuelLog
 );
 
-module.exports = router;
+export default router;

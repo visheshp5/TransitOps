@@ -1,24 +1,28 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
   getDashboardKPIs,
   getVehicleAnalytics,
-} = require("../controllers/analyticsController.js");
+} from "../controllers/analyticscontroller.js";
 
-const authMiddleware = require("../middleware/authMiddleware.js");
+import authMiddleware from "../middleware/authMiddleware.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
+import { ROLES } from "../utils/constants.js";
 
 const router = express.Router();
 
 router.get(
   "/dashboard",
   authMiddleware,
+  roleMiddleware(ROLES.FLEET_MANAGER, ROLES.FINANCIAL_ANALYST),
   getDashboardKPIs
 );
 
 router.get(
   "/vehicles",
   authMiddleware,
+  roleMiddleware(ROLES.FLEET_MANAGER, ROLES.FINANCIAL_ANALYST),
   getVehicleAnalytics
 );
 
-module.exports = router;
+export default router;

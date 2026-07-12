@@ -1,22 +1,18 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
   createExpense,
   getExpenses,
-} = require("../controllers/expenseController.js");
+} from "../controllers/expenseController.js";
 
-const authMiddleware = require("../middleware/authMiddleware.js");
-const roleMiddleware = require("../middleware/roleMiddleware.js");
-const { ROLES } = require("../utils/constants.js");
+import authMiddleware from "../middleware/authMiddleware.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
+import { ROLES } from "../utils/constants.js";
 
 const router = express.Router();
 
 // Authenticated users can view expenses
-router.get(
-  "/",
-  authMiddleware,
-  getExpenses
-);
+router.get("/", authMiddleware, getExpenses);
 
 // Financial Analyst can create expenses
 router.post(
@@ -26,4 +22,4 @@ router.post(
   createExpense
 );
 
-module.exports = router;
+export default router;

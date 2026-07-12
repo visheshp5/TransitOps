@@ -1,14 +1,15 @@
-const dns = require("dns");
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import dns from "dns";
 
-const tripRoutes = require("./routes/tripRoutes");
-const maintenanceRoutes = require("./routes/maintenanceRoutes");
-const fuelRoutes = require("./routes/fuelRoutes");
-const expenseRoutes = require("./routes/expenseRoutes");
-const analyticsRoutes = require("./routes/analyticsRoutes");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+import tripRoutes from "./routes/tripRoutes.js";
+import maintenanceRoutes from "./routes/maintenanceRoutes.js";
+import fuelRoutes from "./routes/fuelRoutes.js";
+import expenseRoutes from "./routes/expenseRoutes.js";
+import analyticsRoutes from "./routes/analyticsroutes.js";
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.use("/api/analytics", analyticsRoutes);
 const PORT = 5000;
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("MongoDB connected successfully");
 
