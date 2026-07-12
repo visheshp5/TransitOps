@@ -68,7 +68,7 @@ export const createTrip = async (req, res) => {
     }
 
     // License validation
-    if (new Date(driver.licenseExpiry) < new Date()) {
+    if (new Date(driver.licenseExpiryDate) < new Date()) {
       return res.status(400).json({
         success: false,
         message: "Driver license has expired",
@@ -251,7 +251,7 @@ export const dispatchTrip = async (req, res) => {
       });
     }
 
-    if (new Date(driver.licenseExpiry) < new Date()) {
+    if (new Date(driver.licenseExpiryDate) < new Date()) {
       return res.status(400).json({
         success: false,
         message: "Driver license has expired",
