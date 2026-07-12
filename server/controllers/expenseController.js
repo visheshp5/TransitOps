@@ -38,7 +38,48 @@ exports.createExpense = async (req, res) => {
 
 exports.getExpenses = async (req, res) => {
   try {
-    const expenses = await Expense.find()
+    // Get filters from query parameters
+    const {
+      vehicle,
+      trip,
+      type,
+      startDate,
+      endDate,
+    } = req.query;
+
+    // Create empty filter object
+    const filter = {};
+
+    // Filter by vehicle
+    if (vehicle) {
+      filter.vehicle = vehicle;
+    }
+
+    // Filter by trip
+    if (trip) {
+      filter.trip = trip;
+    }
+
+    // Filter by expense type
+    if (type) {
+      filter.type = type;
+    }
+
+    // Filter by date range
+    if (startDate || endDate) {
+      filter.date = {};
+
+      if (startDate) {
+        filter.date.$gte = new Date(startDate);
+      }
+
+      if (endDate) {
+        filter.date.$lte = new Date(endDate);
+      }
+    }
+
+    // Fetch expenses using filters
+    const expenses = await Expense.find(filter)
       .populate("vehicle")
       .populate("trip")
       .sort({ date: -1 });
@@ -48,6 +89,7 @@ exports.getExpenses = async (req, res) => {
       count: expenses.length,
       data: expenses,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,

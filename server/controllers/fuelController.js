@@ -38,7 +38,37 @@ exports.createFuelLog = async (req, res) => {
 
 exports.getFuelLogs = async (req, res) => {
   try {
-    const logs = await FuelLog.find()
+    // Get filter values from query parameters
+    const { vehicle, trip, startDate, endDate } = req.query;
+
+    // Create empty filter object
+    const filter = {};
+
+    // Filter by vehicle
+    if (vehicle) {
+      filter.vehicle = vehicle;
+    }
+
+    // Filter by trip
+    if (trip) {
+      filter.trip = trip;
+    }
+
+    // Filter by date range
+    if (startDate || endDate) {
+      filter.date = {};
+
+      if (startDate) {
+        filter.date.$gte = new Date(startDate);
+      }
+
+      if (endDate) {
+        filter.date.$lte = new Date(endDate);
+      }
+    }
+
+    // Fetch fuel logs using filters
+    const logs = await FuelLog.find(filter)
       .populate("vehicle")
       .populate("trip")
       .sort({ date: -1 });
@@ -48,6 +78,7 @@ exports.getFuelLogs = async (req, res) => {
       count: logs.length,
       data: logs,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,

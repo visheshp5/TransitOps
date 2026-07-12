@@ -121,13 +121,42 @@ exports.createTrip = async (req, res) => {
 // ==========================================
 exports.getTrips = async (req, res) => {
   try {
-    const { status } = req.query;
+    const {
+        status,
+        vehicle,
+        driver,
+        source,
+        destination,
+    } = req.query;
 
     const filter = {};
 
     if (status) {
-      filter.status = status;
+       filter.status = status;
     }
+
+    if (vehicle) {
+       filter.vehicle = vehicle;
+    }
+
+    if (driver) {
+       filter.driver = driver;
+    }
+
+    if (source) {
+       filter.source = {
+       $regex: source,
+       $options: "i",
+        };
+    }
+
+    if (destination) {
+       filter.destination = {
+       $regex: destination,
+       $options: "i",
+       };
+    }
+    
 
     const trips = await Trip.find(filter)
       .populate("vehicle")

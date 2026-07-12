@@ -75,7 +75,20 @@ exports.createMaintenance = async (req, res) => {
 // GET MAINTENANCE RECORDS
 exports.getMaintenanceRecords = async (req, res) => {
   try {
-    const records = await Maintenance.find()
+     const { status, vehicle } = req.query;
+
+      const filter = {};
+
+      if (status) {
+          filter.status = status;
+      }
+
+      if (vehicle) {
+          filter.vehicle = vehicle;
+       }
+
+      const records = await Maintenance.find(filter)
+    
       .populate("vehicle")
       .sort({ createdAt: -1 });
 
