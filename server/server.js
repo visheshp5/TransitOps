@@ -5,6 +5,15 @@ import authRoutes from "./routes/authRoutes.js";
 
 import connectDB from "./config/db.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
+import dns from "dns";
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+import tripRoutes from "./routes/tripRoutes.js";
+import maintenanceRoutes from "./routes/maintenanceRoutes.js";
+import fuelRoutes from "./routes/fuelRoutes.js";
+import expenseRoutes from "./routes/expenseRoutes.js";
+import analyticsRoutes from "./routes/analyticsroutes.js";
 
 dotenv.config();
 
@@ -33,6 +42,12 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth", authRoutes);
 
 // Future Routes
+
+app.use("/api/trips", tripRoutes);
+app.use("/api/maintenance", maintenanceRoutes);
+app.use("/api/fuel", fuelRoutes);
+app.use("/api/expenses", expenseRoutes);
+app.use("/api/analytics", analyticsRoutes);
 // app.use("/api/vehicles", vehicleRoutes);
 // app.use("/api/drivers", driverRoutes);
 
