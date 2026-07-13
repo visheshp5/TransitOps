@@ -93,7 +93,7 @@ server/
 Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/visheshp5/TransitOps
 ```
 
 Move inside server
